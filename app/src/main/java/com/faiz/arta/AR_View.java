@@ -3,13 +3,16 @@ package com.faiz.arta;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.wikitude.architect.ArchitectStartupConfiguration;
@@ -22,7 +25,8 @@ public class AR_View extends AppCompatActivity implements LocationListener {
     private ArchitectView architectView;
     private LocationProvider locationProvider;
 
-    Button cari;
+    Button direction;
+    ImageButton search;
 
     private final LocationProvider.ErrorCallback errorCallback = new LocationProvider.ErrorCallback() {
         @Override
@@ -54,6 +58,26 @@ public class AR_View extends AppCompatActivity implements LocationListener {
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey("IeQVz8D2u9RW8vt1yCQHzT+2ekMTnSrkpXtkOl0Eqgg1IfZAPSdtmSKY57YE1+i7qId/b2KuriaBhBbAUwZhBSx8xZkE9E5EzlGr9WJrDV28fjrhpWKkCe4TfQN6dlgZKRFc9IIZmSOHYv7zzQSH0tlA8wDa5l7wLKDQbdEPFHRTYWx0ZWRfX9E4gmog7c+1qQU+yYI9ckaCA/OMxkvT9++FlBlkKbFT2IxL8rR5eRBVLra501Im1JsyfIaCsLUCJ3xzt4kjY/VDFo5NNYG+SradPdBFohmmYs8coAcZb2uJpOBpiy3tlJJHjfMGEOokiJzhdKd0zfXogoPAMOyDiKNr11J6px5uRckCrsHym/tC8QE2uRwfyVHwG39zrVM6x0Pn3rGplbqYIVG4dMmQ7E2B2Xdfu0OnGPRlldjY2UfD8J8e0qFPAsrjR48JjeH+SNB6/VoC41ndGzY5paWKNh9KRNVMeyvvs6Lp7pFNBPRjhLB8U8bl6opB7iVeGlYj2oRCggwPTjC9RjJusOHdN+Va57JSNgOMDnbJ5KFWdu8Lpc97jSIexb38CU0QZsIEe3D+8QQ50s8b6psz4PhcmeKbrxsWD+dymuH2bbWeRWiS4bwaZLQrf9CuxrFOV81UhmJUpS/r8peTWakN62iF5YLPg+DCNpNTJbe1FICJTJbRKPFlIfIa2zCFh57VddC1HyrfajWKa3PUcTSX7wcqzziIOhytoRS+yIaKuZ4NYsUVUSgajSXJZxA+O8seXEohMbaY6/oCXMTGTBwVdqoPSZFxSOqMlX3Sv0v2ffKmPf4=");
         this.architectView.onCreate( config );
+
+        direction = findViewById(R.id.arah);
+        search = findViewById(R.id.cari);
+
+        direction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AR_View.this, DirectionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AR_View.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

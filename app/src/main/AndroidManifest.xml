@@ -39,6 +39,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".DirectionActivity" />
         <activity
             android:name=".AR_View"
             android:configChanges="orientation|keyboardHidden|screenSize" />
