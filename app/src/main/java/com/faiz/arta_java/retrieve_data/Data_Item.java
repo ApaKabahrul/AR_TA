@@ -1,4 +1,4 @@
-package com.faiz.arta.retrieve_data;
+package com.faiz.arta_java.retrieve_data;
 
 class Data_Item {
     private int mId;

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.faiz.arta">
+    package="com.faiz.arta_java">
 
     <dist:module dist:instant="true" />
 
@@ -39,8 +39,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SearchActivity"></activity>
-        <activity android:name=".DirectionActivity" />
+        <activity android:name=".Fusion"></activity>
+        <activity
+            android:name=".ImageRecognition"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity android:name=".SearchActivity" />
         <activity
             android:name=".AR_View"
             android:configChanges="orientation|keyboardHidden|screenSize" />

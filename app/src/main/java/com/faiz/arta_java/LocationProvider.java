@@ -1,4 +1,4 @@
-package com.faiz.arta;
+package com.faiz.arta_java;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
