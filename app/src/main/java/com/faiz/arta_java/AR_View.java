@@ -8,18 +8,23 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.wikitude.architect.ArchitectJavaScriptInterfaceListener;
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
-public class AR_View extends AppCompatActivity implements LocationListener {
+public class AR_View extends AppCompatActivity implements LocationListener, ArchitectJavaScriptInterfaceListener {
 
     private ArchitectView architectView;
     private LocationProvider locationProvider;
@@ -68,6 +73,7 @@ public class AR_View extends AppCompatActivity implements LocationListener {
             }
         });
 
+        architectView.addArchitectJavaScriptInterfaceListener(this);
     }
 
     @Override
@@ -95,6 +101,7 @@ public class AR_View extends AppCompatActivity implements LocationListener {
     protected void onDestroy() {
         super.onDestroy();
         architectView.onDestroy();
+        architectView.removeArchitectJavaScriptInterfaceListener(this);
     }
 
     @Override
@@ -127,5 +134,11 @@ public class AR_View extends AppCompatActivity implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    @Override
+    public void onJSONObjectReceived(JSONObject jsonObject) {
+        final Intent detailIntent = new Intent(AR_View.this, ImageRecognition.class);
+        startActivity(detailIntent);
     }
 }

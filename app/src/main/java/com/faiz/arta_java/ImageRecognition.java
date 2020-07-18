@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class ImageRecognition extends AppCompatActivity {
 
+    public static final String EXTRAS_KEY_POI_ID = "id";
+
     private ArchitectView architectView;
 
     @Override

@@ -39,7 +39,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Fusion"></activity>
         <activity
             android:name=".ImageRecognition"
             android:configChanges="orientation|keyboardHidden|screenSize" />
