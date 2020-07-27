@@ -118,6 +118,10 @@ public class AR_View extends AppCompatActivity implements LocationListener, Arch
             architectView.setLocation(location.getLatitude(), location.getLongitude(), location.getAltitude(), accuracy);
         } else {
             architectView.setLocation(location.getLatitude(), location.getLongitude(), accuracy);
+
+            Log.d("Latitude",""+location.getLatitude());
+            Log.d("Longitude",""+location.getLongitude());
+            Log.d("Accuracy",""+accuracy);
         }
     }
 
@@ -138,7 +142,21 @@ public class AR_View extends AppCompatActivity implements LocationListener, Arch
 
     @Override
     public void onJSONObjectReceived(JSONObject jsonObject) {
-        final Intent detailIntent = new Intent(AR_View.this, ImageRecognition.class);
-        startActivity(detailIntent);
+        try {
+            switch (jsonObject.getString("action")){
+                case "intent_activity":
+                    final Intent detailIntent = new Intent(AR_View.this, ImageRecognition.class);
+                    startActivity(detailIntent);
+                    break;
+                case "poi":
+                    Log.d("TEST_POI",""+jsonObject.getString("latitude"));
+                    Log.d("TEST_POI",""+jsonObject.getString("longitude"));
+            }
+        }
+
+        catch (JSONException e){
+            Log.e("FAIL","Ngga bisa bos");
+        }
+
     }
 }
