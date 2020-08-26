@@ -39,6 +39,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainMapbox"></activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,11 +50,10 @@
         <activity
             android:name=".ImageRecognition"
             android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity android:name=".SearchActivity" />
         <activity
             android:name=".AR_View"
             android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
