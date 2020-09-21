@@ -7,10 +7,13 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.faiz.arta_java.AR_View.Companion.WIKI_LAT
 import com.faiz.arta_java.AR_View.Companion.WIKI_LONG
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.mapbox.api.directions.v5.DirectionsCriteria
 import com.mapbox.api.directions.v5.models.DirectionsResponse
 import com.mapbox.api.directions.v5.models.DirectionsRoute
@@ -36,6 +39,7 @@ import retrofit2.Response
 
 class MainMapbox : AppCompatActivity(), OnMapReadyCallback {
 
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     var currentRoute: DirectionsRoute? = null
     var mapboxMap: MapboxMap? = null
     var navigationMapRoute: NavigationMapRoute? = null
@@ -43,6 +47,7 @@ class MainMapbox : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         Mapbox.getInstance(
             this,
             "pk.eyJ1IjoiYXBha2FiYWhydWwiLCJhIjoiY2tlODIxMmh0MTBmcDJycG83ZGF0YTBvOCJ9.WPiyOqgHv25c1NG1DzG47g"
@@ -61,26 +66,30 @@ class MainMapbox : AppCompatActivity(), OnMapReadyCallback {
 
             addDestinationIconSymbolLayer(style)
 
-            val lm: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            val userLocation: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            /*val lm: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val userLocation: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)*/
 
             val destLat = intent.getStringExtra(WIKI_LAT)
             val destLong = intent.getStringExtra(WIKI_LONG)
-            val originPoint: Point = Point.fromLngLat(userLocation?.longitude!!, userLocation.latitude)
-            val destinationPoint: Point = Point.fromLngLat(destLong.toDouble(), destLat.toDouble())
 
-            val source: GeoJsonSource = mapboxMap.style?.getSourceAs("destination-source-id")!!
-            source.setGeoJson(Feature.fromGeometry(destinationPoint))
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location?->
+                val originPoint: Point = Point.fromLngLat(location!!.longitude, location.latitude)
+                val destinationPoint: Point = Point.fromLngLat(destLong.toDouble(), destLat.toDouble())
 
-            getRoute(originPoint, destinationPoint)
+                val source: GeoJsonSource = mapboxMap.style?.getSourceAs("destination-source-id")!!
+                source.setGeoJson(Feature.fromGeometry(destinationPoint))
 
-            fab.setOnClickListener{
-                val options = NavigationLauncherOptions.builder()
-                    .directionsRoute(currentRoute)
-                    .shouldSimulateRoute(false)
-                    .build()
-                NavigationLauncher.startNavigation(this, options)
+                getRoute(originPoint, destinationPoint)
+
+                fab.setOnClickListener{
+                    val options = NavigationLauncherOptions.builder()
+                        .directionsRoute(currentRoute)
+                        .shouldSimulateRoute(false)
+                        .build()
+                    NavigationLauncher.startNavigation(this, options)
+                }
             }
+
         }
     }
 
