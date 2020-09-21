@@ -8,7 +8,6 @@ import com.wikitude.architect.ArchitectView
 import java.io.IOException
 
 class ImageRecognition : AppCompatActivity() {
-    //public static final String EXTRAS_KEY_POI_ID = "id";
     private var architectView: ArchitectView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

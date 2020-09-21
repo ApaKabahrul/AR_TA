@@ -25,13 +25,12 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL)
         }
 
-
         loc.setOnClickListener {
-                val i = Intent(this@MainActivity, AR_View::class.java)
-                startActivity(i)
+            val i = Intent(this, AR_View::class.java)
+            startActivity(i)
         }
         pindah.setOnClickListener {
-            val i = Intent(this@MainActivity, ImageRecognition::class.java)
+            val i = Intent(this, ImageRecognition::class.java)
             startActivity(i)
         }
     }

@@ -21,19 +21,11 @@ class AR_View : AppCompatActivity(), LocationListener, ArchitectJavaScriptInterf
     private var architectView: ArchitectView? = null
     private var locationProvider: LocationProvider? = null
     private val errorCallback = LocationProvider.ErrorCallback {
-        Toast.makeText(
-            this@AR_View,
-            "Please enable GPS and Network positioning in your Settings and restart the Activity",
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(this@AR_View,"Nyalakan GPS positioning dan restart aplikasi",Toast.LENGTH_LONG).show()
     }
     private val sensorAccuracyChangeListener = SensorAccuracyChangeListener { accuracy ->
         if (accuracy < SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM) { // UNRELIABLE = 0, LOW = 1, MEDIUM = 2, HIGH = 3
-            Toast.makeText(
-                this@AR_View,
-                "Please re-calibrate compass by waving your device in a figure 8 motion",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(this@AR_View,"Please re-calibrate compass by waving your device in a figure 8 motion",Toast.LENGTH_LONG).show()
         }
     }
 
@@ -55,8 +47,8 @@ class AR_View : AppCompatActivity(), LocationListener, ArchitectJavaScriptInterf
         super.onPostCreate(savedInstanceState)
         architectView!!.onPostCreate()
         try {
-            //this.architectView.load( "file:///android_asset/POI4/index.html" );
-            architectView!!.load("https://apakabahrul.github.io/")
+            architectView!!.load( "file:///android_asset/LBS/index.html" );
+            //architectView!!.load("https://apakabahrul.github.io/")
         } catch (e: IOException) {
             e.printStackTrace()
         }

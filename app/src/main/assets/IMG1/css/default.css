@@ -22,13 +22,3 @@
     text-align: right;
     width: 50%;
 }
-
-#infoBox .icons {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: left;
-}
-
-#infoBox .icons img {
-    margin-left: 15px;
-}
