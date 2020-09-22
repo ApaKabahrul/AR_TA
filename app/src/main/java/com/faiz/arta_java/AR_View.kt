@@ -47,7 +47,7 @@ class AR_View : AppCompatActivity(), LocationListener, ArchitectJavaScriptInterf
         super.onPostCreate(savedInstanceState)
         architectView!!.onPostCreate()
         try {
-            architectView!!.load( "file:///android_asset/LBS/index.html" );
+            architectView!!.load( "file:///android_asset/LBS/index.html" )
             //architectView!!.load("https://apakabahrul.github.io/")
         } catch (e: IOException) {
             e.printStackTrace()
@@ -63,6 +63,7 @@ class AR_View : AppCompatActivity(), LocationListener, ArchitectJavaScriptInterf
 
     override fun onDestroy() {
         super.onDestroy()
+        architectView!!.clearCache()
         architectView!!.onDestroy()
         architectView!!.removeArchitectJavaScriptInterfaceListener(this)
     }
@@ -98,7 +99,7 @@ class AR_View : AppCompatActivity(), LocationListener, ArchitectJavaScriptInterf
                     startActivity(detailIntent)
                 }
                 "poi" -> {
-                    val i = Intent(this, MainMapbox::class.java)
+                    val i = Intent(this, MapboxNav::class.java)
                     i.putExtra(WIKI_LAT, jsonObject.getString("latitude"))
                     i.putExtra(WIKI_LONG, jsonObject.getString("longitude"))
                     startActivity(i)
