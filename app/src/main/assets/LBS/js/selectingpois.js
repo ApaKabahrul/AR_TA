@@ -12,10 +12,9 @@ var ArTa = {
     markerDrawableSelected: null,
     markerDrawableDirectionIndicator: null,
 
-    sound: null,
+    //sound: null,
 
     markerList: [],
-
     currentMarker: null,
 
     locationUpdaterCounter: 0,
@@ -30,7 +29,7 @@ var ArTa = {
         /*ArTa.sound = new AR.Sound("assets/siren.wav", {onLoaded:ArTa.onLoaded, onError: ArTa.onError});
         ArTa.sound.load();*/
 
-        ArTa.markerDrawableIdle = new AR.ImageResource("assets/marker_idle_small.png", {onError: ArTa.onError});
+        ArTa.markerDrawableIdle = new AR.ImageResource("assets/marker_idle_last.png", {onError: ArTa.onError});
         ArTa.markerDrawableSelected = new AR.ImageResource("assets/marker_selected.png", {onError: ArTa.onError});
         ArTa.markerDrawableDirectionIndicator = new AR.ImageResource("assets/indi.png", {onError: ArTa.onError});
 
@@ -107,14 +106,6 @@ var ArTa = {
         ArTa.currentMarker = marker;*/
     },
 
-    onScreenClick: function onScreenClickFn() {
-
-        /*if (ArTa.currentMarker) {
-            ArTa.currentMarker.setDeselected(ArTa.currentMarker);
-        }
-        ArTa.currentMarker = null;*/
-    },
-
     requestDataFromServer: function requestDataFromServerFn(lat, lon) {
         ArTa.isRequestingData = true;
         ArTa.updateStatusMessage('Requesting tempat...');
@@ -144,6 +135,7 @@ var ArTa = {
         alert(error);
     },
 
+    //Direksi ke penunjuk arah
     onPoiDetailMoreButtonClicked: function onPoiDetailMoreButtonClickedFn() {
         var currentMarker = ArTa.currentMarker;
         var markerSelectedJSON = {
@@ -157,4 +149,3 @@ var ArTa = {
 };
 
 AR.context.onLocationChanged = ArTa.locationChanged;
-AR.context.onScreenClick = ArTa.onScreenClick;
