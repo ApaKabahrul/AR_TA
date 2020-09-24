@@ -6,10 +6,16 @@ var ARTA_IR = {
 
     createOverlays: function createOverlaysFn() {
 
-        var targetCollectionResource = new AR.TargetCollectionResource("assets/tracker_d1.wtc", { onError: ARTA_IR.onError });
+        var targetCollectionResource = new AR.TargetCollectionResource("assets/tracker_c2.wtc", { onError: ARTA_IR.onError });
         var tracker = new AR.ImageTracker(targetCollectionResource, { onTargetsLoaded: ARTA_IR.showInfoBar, onError: ARTA_IR.onError });
 
         //init ruangan
+        var aAkred = new AR.ImageResource("assets/akred.png", {onError: ARTA_IR.onError});
+        var oAkred = new AR.ImageDrawable(aAkred, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
+
+        var aAsrama = new AR.ImageResource("assets/asrama.png", {onError: ARTA_IR.onError});
+        var oAsrama = new AR.ImageDrawable(aAsrama, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
+
         var aAula = new AR.ImageResource("assets/aula.png", {onError: ARTA_IR.onError});
         var oAula = new AR.ImageDrawable(aAula, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
 
@@ -19,11 +25,17 @@ var ARTA_IR = {
         var aBiosistem = new AR.ImageResource("assets/biosistem.png", {onError: ARTA_IR.onError});
         var oBiosistem = new AR.ImageDrawable(aBiosistem, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
 
+        var aBmkg = new AR.ImageResource("assets/bmkg.png", {onError: ARTA_IR.onError});
+        var oBmkg = new AR.ImageDrawable(aBmkg, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
+
         var aEnergi = new AR.ImageResource("assets/energi.png", {onError: ARTA_IR.onError});
         var oEnergi = new AR.ImageDrawable(aEnergi, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
 
         var aFisika = new AR.ImageResource("assets/fisika.png", {onError: ARTA_IR.onError});
         var oFisika = new AR.ImageDrawable(aFisika, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
+
+        var aGeofisika = new AR.ImageResource("assets/geofisika.png", {onError: ARTA_IR.onError});
+        var oGeofisika = new AR.ImageDrawable(aGeofisika, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
 
         var aGudang = new AR.ImageResource("assets/gudang.png", {onError: ARTA_IR.onError});
         var oGudang = new AR.ImageDrawable(aGudang, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
@@ -46,6 +58,9 @@ var ARTA_IR = {
         var aKelas = new AR.ImageResource("assets/kelas.png", {onError: ARTA_IR.onError});
         var oKelas = new AR.ImageDrawable(aKelas, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
 
+        var aKimia = new AR.ImageResource("assets/kimia.png", {onError: ARTA_IR.onError});
+        var oKimia = new AR.ImageDrawable(aKimia, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
+
         var aKkn = new AR.ImageResource("assets/kkn.png", {onError: ARTA_IR.onError});
         var oKkn = new AR.ImageDrawable(aKkn, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
 
@@ -63,6 +78,12 @@ var ARTA_IR = {
 
         var aMusik = new AR.ImageResource("assets/musik.png", {onError: ARTA_IR.onError});
         var oMusik = new AR.ImageDrawable(aMusik, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
+
+        var aOail = new AR.ImageResource("assets/oail.png", {onError: ARTA_IR.onError});
+        var oOail = new AR.ImageDrawable(aOail, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
+
+        var aOb = new AR.ImageResource("assets/ob.png", {onError: ARTA_IR.onError});
+        var oOb = new AR.ImageDrawable(aOb, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
 
         var aPangan = new AR.ImageResource("assets/pangan.png", {onError: ARTA_IR.onError});
         var oPangan = new AR.ImageDrawable(aPangan, 0.5, { translate: {x: -0.8, y: -0.04 }, scale: { x: 5, y: 5}});
@@ -93,7 +114,16 @@ var ARTA_IR = {
 
         //Gedung C Lt 1 (disini)
 
-        //Gedung C Lt 2 (disini)
+        //Gedung C Lt 2
+        var C201 = new AR.ImageTrackable(tracker, "C201", {drawables: { cam: oAkred }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
+        var C202 = new AR.ImageTrackable(tracker, "C202", {drawables: { cam: oAkred }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
+        var C203 = new AR.ImageTrackable(tracker, "C203", {drawables: { cam: oAkred }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
+        var C204 = new AR.ImageTrackable(tracker, "C204", {drawables: { cam: oKimia }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
+        var C206 = new AR.ImageTrackable(tracker, "C206", {drawables: { cam: oOb }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
+        var C207 = new AR.ImageTrackable(tracker, "C207", {drawables: { cam: oOail }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
+        var C208 = new AR.ImageTrackable(tracker, "C208", {drawables: { cam: oBmkg }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
+        var C209 = new AR.ImageTrackable(tracker, "C209", {drawables: { cam: oAsrama }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
+        var C210 = new AR.ImageTrackable(tracker, "C210", {drawables: { cam: oGeofisika }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
 
         //Gedung C Lt 3
         var C301 = new AR.ImageTrackable(tracker, "C301", {drawables: { cam: oAula }, onImageRecognized: ARTA_IR.hideInfoBar, onImageLost: ARTA_IR.showInfoBar});
