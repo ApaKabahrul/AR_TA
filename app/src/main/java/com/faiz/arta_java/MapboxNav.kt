@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.location.Location
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -33,12 +32,18 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MapboxNav : AppCompatActivity(), OnMapReadyCallback {
+    
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var mapView: MapView? = null
     private var mapboxMap: MapboxMap? = null
     private var locationComponent: LocationComponent? = null
     private var currentRoute: DirectionsRoute? = null
     private var navigationMapRoute: NavigationMapRoute? = null
+
+    private val SOURCE_ID = "SOURCE_ID"
+    private val ICON_ID = "DEST_ICON_ID"
+    private val LAYER_ID = "DEST_LAYER_ID"
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -66,7 +71,7 @@ class MapboxNav : AppCompatActivity(), OnMapReadyCallback {
 
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location?->
                 val originPoint = Point.fromLngLat(location!!.longitude, location.latitude)
-                val source = mapboxMap.style!!.getSourceAs<GeoJsonSource>("destination-source-id")
+                val source = mapboxMap.style!!.getSourceAs<GeoJsonSource>(SOURCE_ID)
                 source?.setGeoJson(Feature.fromGeometry(destinationPoint))
                 getRoute(destinationPoint, originPoint)
             }
@@ -111,15 +116,15 @@ class MapboxNav : AppCompatActivity(), OnMapReadyCallback {
 
     private fun addDestinationIconSymbolLayer(loadedMapStyle: Style) {
         loadedMapStyle.addImage(
-            "destination-icon-id",
+            ICON_ID,
             BitmapFactory.decodeResource(this.resources, R.drawable.mapbox_marker_icon_default)
         )
-        val geoJsonSource = GeoJsonSource("destination-source-id")
+        val geoJsonSource = GeoJsonSource(SOURCE_ID)
         loadedMapStyle.addSource(geoJsonSource)
         val destinationSymbolLayer =
-            SymbolLayer("destination-symbol-layer-id", "destination-source-id")
+            SymbolLayer(LAYER_ID, SOURCE_ID)
         destinationSymbolLayer.withProperties(
-            PropertyFactory.iconImage("destination-icon-id"),
+            PropertyFactory.iconImage(ICON_ID),
             PropertyFactory.iconAllowOverlap(true),
             PropertyFactory.iconIgnorePlacement(true)
         )

@@ -29,21 +29,13 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, AR_View::class.java)
             startActivity(i)
         }
-        pindah.setOnClickListener {
-            val i = Intent(this, ImageRecognition::class.java)
-            startActivity(i)
-        }
     }
 
     companion object {
         fun hasPermissions(context: Context?, vararg permissions: String?): Boolean {
             if (context != null) {
                 for (permission in permissions) {
-                    if (ActivityCompat.checkSelfPermission(
-                            context,
-                            permission!!
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
+                    if (ActivityCompat.checkSelfPermission(context,permission!!) != PackageManager.PERMISSION_GRANTED) {
                         return false
                     }
                 }
