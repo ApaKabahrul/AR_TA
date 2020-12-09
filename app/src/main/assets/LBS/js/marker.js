@@ -5,7 +5,6 @@ function Marker(dataPOI) {
 
     this.dataPOI = dataPOI;
     this.isSelected = false;
-
     this.animationGroupIdle = null;
     this.animationGroupSelected = null;
 
@@ -62,9 +61,7 @@ Marker.prototype.getOnClickTrigger = function(marker) {
 
         if (!Marker.prototype.isAnyAnimationRunning(marker)) {
             if (marker.isSelected) {
-
                 Marker.prototype.setDeselected(marker);
-
             } else {
                 Marker.prototype.setSelected(marker);
                 try {
@@ -74,16 +71,12 @@ Marker.prototype.getOnClickTrigger = function(marker) {
                 }
 
             }
-        } else {
-            AR.logger.debug('a animation is already running');
         }
-
         return true;
     };
 };
 
 Marker.prototype.setSelected = function(marker) {
-
     marker.isSelected = true;
     if (marker.animationGroupSelected === null) {
         var easingCurve = new AR.EasingCurve(AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC, {amplitude: 2.0});

@@ -7,13 +7,9 @@ var ServerInformation = {
 var ArTa = {
     isRequestingData: false,
     initiallyLoadedData: false,
-
     markerDrawableIdle: null,
     markerDrawableSelected: null,
     markerDrawableDirectionIndicator: null,
-
-    //sound: null,
-
     markerList: [],
     currentMarker: null,
 
@@ -22,12 +18,7 @@ var ArTa = {
 
     loadPois: function loadPois(dataPOI) {
         RadarPOI.show();
-
         ArTa.markerList = [];
-
-        //Play sound
-        /*ArTa.sound = new AR.Sound("assets/siren.wav", {onLoaded:ArTa.onLoaded, onError: ArTa.onError});
-        ArTa.sound.load();*/
 
         ArTa.markerDrawableIdle = new AR.ImageResource("assets/marker_idle_last.png", {onError: ArTa.onError});
         ArTa.markerDrawableSelected = new AR.ImageResource("assets/marker_selected.png", {onError: ArTa.onError});
@@ -94,16 +85,6 @@ var ArTa = {
         $("#panel-poidetail").on("panelbeforeclose", function (event, ui){
             ArTa.currentMarker.setDeselected(ArTa.currentMarker);
         });
-
-        /*if (ArTa.currentMarker) {
-            if (ArTa.currentMarker.dataPOI.id === marker.dataPOI.id) {
-                return;
-            }
-            ArTa.currentMarker.setDeselected(ArTa.currentMarker);
-        }*/
-
-        /*marker.setSelected(marker);
-        ArTa.currentMarker = marker;*/
     },
 
     requestDataFromServer: function requestDataFromServerFn(lat, lon) {
@@ -127,15 +108,11 @@ var ArTa = {
             });
     },
 
-    /*onLoaded: function onLoadedFn() {
-        ArTa.sound.play();
-    },*/
-
     onError: function onErrorFn(error) {
         alert(error);
     },
 
-    //Direksi ke penunjuk arah
+    //Lempar ke penunjuk arah
     onPoiDetailMoreButtonClicked: function onPoiDetailMoreButtonClickedFn() {
         var currentMarker = ArTa.currentMarker;
         var markerSelectedJSON = {
@@ -149,3 +126,6 @@ var ArTa = {
 };
 
 AR.context.onLocationChanged = ArTa.locationChanged;
+//setting maximum jarak
+AR.context.scene.cullingDistance = 100;
+AR.context.scene.maxScalingDistance = 2000;
