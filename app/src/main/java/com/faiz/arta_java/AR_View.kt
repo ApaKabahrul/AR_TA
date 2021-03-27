@@ -6,7 +6,7 @@ import android.location.Location
 import android.location.LocationListener
 import android.os.Bundle
 import android.view.WindowManager
-import android.webkit.WebView
+//import android.webkit.WebView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.wikitude.architect.ArchitectJavaScriptInterfaceListener
@@ -24,8 +24,8 @@ class AR_View : AppCompatActivity(), LocationListener, ArchitectJavaScriptInterf
         Toast.makeText(this@AR_View,"Nyalakan GPS dan restart activity",Toast.LENGTH_LONG).show()
     }
     private val sensorAccuracyChangeListener = SensorAccuracyChangeListener { accuracy ->
-        if (accuracy < SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM) { // UNRELIABLE = 0, LOW = 1, MEDIUM = 2, HIGH = 3
-            Toast.makeText(this@AR_View,"Mohon kalibrasikan kompas perangkat",Toast.LENGTH_LONG).show()
+        if (accuracy < SensorManager.SENSOR_STATUS_ACCURACY_HIGH) {
+            Toast.makeText(this@AR_View,"Mohon kalibrasikan sensor perangkat",Toast.LENGTH_LONG).show()
         }
     }
 
@@ -78,7 +78,7 @@ class AR_View : AppCompatActivity(), LocationListener, ArchitectJavaScriptInterf
     }
 
     override fun onLocationChanged(location: Location) {
-        val accuracy: Float = if (location.hasAccuracy()) location.accuracy else 1000.0F
+        val accuracy: Float = if (location.hasAccuracy()) location.accuracy else 100.0F
         if (location.hasAltitude()) {
             architectView!!.setLocation(
                 location.latitude,

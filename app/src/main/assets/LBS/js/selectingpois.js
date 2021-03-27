@@ -14,7 +14,7 @@ var ArTa = {
     currentMarker: null,
 
     locationUpdaterCounter: 0,
-    locationUpdaterMeter: 5,
+    locationUpdaterMeter: 3,
 
     loadPois: function loadPois(dataPOI) {
         RadarPOI.show();
@@ -79,7 +79,6 @@ var ArTa = {
         var distanceValue = (marker.distanceToUser > 999) ? ((marker.distanceToUser / 1000).toFixed(2) + " km") : (Math.round(marker.distanceToUser) + " m");
 
         $("#detail-jarak").html(distanceValue);
-
         $("#panel-poidetail").panel("open",123);
         $("#ui-panel-dismiss").unbind("mousedown");
         $("#panel-poidetail").on("panelbeforeclose", function (event, ui){
@@ -127,5 +126,5 @@ var ArTa = {
 
 AR.context.onLocationChanged = ArTa.locationChanged;
 //setting maximum jarak
-AR.context.scene.cullingDistance = 100;
-AR.context.scene.maxScalingDistance = 2000;
+AR.context.scene.cullingDistance = 350;
+AR.context.scene.maxScalingDistance = 500;
